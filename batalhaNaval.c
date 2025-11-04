@@ -12,17 +12,24 @@ int main() {
 
         printf ("\nBatalha Naval\n");
         printf ("   \nOpções\n");
-        printf("\n1. Mostrar o Tabuleiro\n2. Adicionar Navio\n3. Sair\nQual opção?: ");
+        printf("\n1. Mostrar o Tabuleiro\n2. Adicionar Navio\n3. Sair\n\nQual opção?: ");
         scanf("%d", &opcao);
 
     switch(opcao){
 
         case 1: {
             //Mostra o tabuleiro
+            printf("\n=-=-Tabuleiro-=-=\n");
+            for (int num = 1; num <= 10; num++){
+                printf("   %d", num);
+            }
+            
+            printf("\n");
 
             for (int i = 0; i < 10; i++){
+                printf("%c |", 'A' + i);
                 for (int j = 0; j < 10; j++){
-                    printf("%d  ", t[i][j]);
+                    printf(" %d  ", t[i][j]);
                     }
                 printf("\n");
                 }
@@ -31,21 +38,42 @@ int main() {
         break;
             
         case 2: {
-             //Navios
+            //Navios
 
             int coluna;
             int inicio;
             int tamanho;
+            char direcao;
 
-            printf("\nQual coluna? (0 - 10): ");
+            printf("Qual coluna? (0 - 9): ");
                 scanf("%d", &coluna);
-            printf("\nQual o inicio? (0 - 10): ");
+            printf("Qual o inicio? (0 - 9): ");
                 scanf("%d", &inicio);
             printf("Qual o tamanho? (1 - 3): ");
                 scanf("%d", &tamanho);
+            printf("Digite a direção do navio (v = Vertical // h - Horizontal): ");
+                scanf(" %c", &direcao);
 
-            for (int i = inicio; i < inicio + tamanho; i++) {
-                t[i][coluna] = 1;
+            for (int i = 0; i < tamanho; i++) {
+                if (direcao == 'V' || direcao == 'v'){
+                    if (inicio + i < 10){
+                        t[inicio + i][coluna] = 1;
+                    }
+                    else{
+                        printf("Posição invalida!!");
+                    }
+                }
+                else if (direcao == 'h' || direcao == 'H'){
+                    if (coluna + i < 10){
+                        t[inicio][coluna + i] = 1;
+                    }
+                    else {
+                        printf("Posição Invalida!!");
+                    }
+                }
+                else {
+                    printf("Opção invalida!!");
+                }
             }
         }
 
